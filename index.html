@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Assya El Hajjami, portfolio data analyst</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#16202e;--mute:#5a6678;--line:#dde3ec;--acc:#0f8b8d;--acc2:#c9831f;--code:#101a27;--codeink:#d7e3f4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1520;--card:#162031;--ink:#e7eef7;--mute:#9aa8bb;--line:#26344a;--acc:#4fd1c5;--acc2:#f0b45a;--code:#0a111b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1520;--card:#162031;--ink:#e7eef7;--mute:#9aa8bb;--line:#26344a;--acc:#4fd1c5;--acc2:#f0b45a;--code:#0a111b;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,sans-serif;line-height:1.1;margin:0}
+a{color:var(--acc)}
+.w{max-width:1040px;margin:0 auto;padding:0 22px}
+nav{display:flex;gap:20px;justify-content:flex-end;padding:18px 0;font-size:15px;flex-wrap:wrap}
+nav a{color:var(--mute);text-decoration:none}nav a:hover,nav a:focus-visible{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:34px 0 64px}
+.hero h1{font-size:clamp(36px,5.6vw,62px);font-weight:700;letter-spacing:-.02em}
+.hero p{color:var(--mute);max-width:52ch;margin:18px 0 24px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:8px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+.btn.p{background:var(--ink);color:var(--bg)}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.term{background:var(--code);color:var(--codeink);border-radius:10px;padding:18px 20px;font:13.5px/1.65 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
+.term .k{color:#7fb7ff}.term .c{color:#7a8aa3}.term .r{color:#f0b45a;display:block;margin-top:10px;padding-top:10px;border-top:1px dashed #33445d}
+section{padding:56px 0;border-top:1px solid var(--line)}
+section>.w>h2{font-size:clamp(28px,3.6vw,38px);margin-bottom:10px}
+.lead{color:var(--mute);max-width:64ch;margin:0 0 28px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.flow div{padding:16px 18px;border-right:1px solid var(--line);font-size:15px}.flow div:last-child{border:0}
+.flow b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:18px;margin-bottom:4px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.skills div{border-left:3px solid var(--acc);padding:2px 0 2px 14px}
+.skills b{display:block}.skills span{color:var(--mute);font-size:15px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:30px;margin-bottom:30px}
+.proj h3{font-size:28px;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.tags li{font-size:13px;border:1px solid var(--line);border-radius:99px;padding:2px 11px;color:var(--mute)}
+.q{display:grid;grid-template-columns:150px 1fr;gap:6px 22px;margin:18px 0}
+.q dt{font-weight:600;color:var(--acc)}.q dd{margin:0}
+.bars{margin:14px 0}.bar{display:grid;grid-template-columns:170px 1fr 56px;gap:10px;align-items:center;font-size:14.5px;margin:6px 0}
+.bar i{display:block;height:14px;border-radius:3px;background:var(--acc)}.bar i.b{background:var(--acc2)}.bar i.g{background:var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:16px 0}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:12px 14px}.kpi b{font:700 26px "Bricolage Grotesque",sans-serif;display:block}.kpi span{font-size:13.5px;color:var(--mute)}
+pre{margin:14px 0;background:var(--code);color:var(--codeink);border-radius:8px;padding:14px 16px;overflow-x:auto;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace}
+.pb{border-left:3px solid var(--acc2);padding:8px 0 8px 16px;margin:18px 0;color:var(--mute)}
+.pb b{color:var(--ink)}
+.wrap{overflow-x:auto}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute)}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.flow div{border-bottom:1px solid var(--line)}.q{grid-template-columns:1fr}.bar{grid-template-columns:120px 1fr 48px}.proj{padding:20px}}
+</style>
+</head>
+<body>
+<div class="w">
+<nav><a href="#methode">Ma méthode</a><a href="#competences">Compétences</a><a href="#projets">Projets</a><a href="#contact">Contact</a></nav>
+<header class="hero">
+<div>
+<h1>Je transforme des données en décisions, et je ne lâche pas tant que le problème n’est pas résolu.</h1>
+<p>Assya El Hajjami, alternante data analyst. Cinq ans de communication et de marketing m’ont appris à poser la bonne question métier. Mon M1 Data Marketing Analyst & IA (ESD) et la certification Google Data Analytics m’ont donné les outils pour y répondre avec SQL, Sheets, Looker Studio et Python.</p>
+<div class="btns"><a class="btn p" href="#projets">Voir mes projets</a><a class="btn" href="#contact">Me contacter</a></div>
+</div>
+<div class="term" aria-label="Exemple de requête SQL">
+<span class="c">-- Les films « mauvais mais très vus »</span><br>
+<span class="k">SELECT</span> COUNT(*) <span class="k">FROM</span> films<br>
+<span class="k">WHERE</span> vote_average &lt; 4.6<br>
+&nbsp;&nbsp;<span class="k">AND</span> vote_count &gt;= 100;
+<span class="r">36 films : la cible de PREHISTOSHARK 2</span>
+</div>
+</header>
+</div>
+
+<section id="methode"><div class="w">
+<h2>Ma démarche</h2>
+<p class="lead">Sur chaque projet, je pars d’une question concrète, je vérifie que la donnée est fiable, puis je ne retiens que ce qui change une décision.</p>
+<div class="flow">
+<div><b>Question</b>Quel est le vrai enjeu métier ?</div>
+<div><b>Nettoyage</b>Doublons, cellules fusionnées, valeurs à 0 ou manquantes.</div>
+<div><b>Analyse</b>SQL, tests statistiques, visualisations.</div>
+<div><b>Décision</b>Une recommandation, avec ses limites.</div>
+</div>
+</div></section>
+
+<section id="competences"><div class="w">
+<h2>Compétences</h2>
+<p class="lead">Un socle technique en construction rapide, appuyé sur une vraie culture marketing.</p>
+<div class="skills">
+<div><b>SQL</b><span>Jointures, agrégats, filtres de dates, LIKE, tables temporaires (SQLite, BigQuery en cours)</span></div>
+<div><b>Google Sheets et Excel</b><span>Formules, nettoyage, tableaux croisés, graphiques</span></div>
+<div><b>Statistiques</b><span>Test t de Welch, d de Cohen, corrélation, significativité contre taille d’effet</span></div>
+<div><b>Looker Studio</b><span>Dashboards multi-pages, KPIs, modèle de données propre</span></div>
+<div><b>Python</b><span>Initiation (certification Google)</span></div>
+<div><b>Marketing et SEO</b><span>Meta Ads, HubSpot, Semrush, lecture de KPIs de performance</span></div>
+</div>
+</div></section>
+
+<section id="projets"><div class="w">
+<h2>Projets</h2>
+<p class="lead">Quatre projets, chacun avec la question, la méthode, le résultat et ce que je referais autrement.</p>
+
+<article class="proj">
+<h3>PREHISTOSHARK 2 : prédire un échec garanti avec 16 000 films</h3>
+<ul class="tags"><li>SQL (SQLite)</li><li>Google Sheets</li><li>Analyse exploratoire</li><li>Nuages de mots</li><li>Projet de groupe</li></ul>
+<dl class="q">
+<dt>Question</dt><dd>Quels choix de production rendent un film à la fois mal noté et très vu, donc « un succès tant il est mauvais » ?</dd>
+<dt>Démarche</dt><dd>Analyse en SQL du catalogue Netflix (TMDB, jusqu’en 2025). Définition d’une cible : note sous 4,6 avec au moins 100 votes, soit 36 films. Pour chaque variable (genre, sujet, format, titre, langue, budget, description), comparaison de la cible au reste du catalogue.</dd>
+<dt>Résultat</dt><dd>Au lieu de prendre le pire de chaque catégorie, j’ai combiné les ingrédients qui font monter la visibilité et baisser la note.</dd>
+</dl>
+<div class="bars" role="img" aria-label="Part de films notés sous 4,6 : 60 % pour les titres Shark ou Piranha, 5 % pour le reste">
+<div class="bar"><span>Titres Shark / Piranha</span><i class="b" style="width:60%"></i><b>60 %</b></div>
+<div class="bar"><span>Reste du catalogue</span><i class="g" style="width:5%"></i><b>5 %</b></div>
+</div>
+<div class="kpis">
+<div class="kpi"><b>×3,5</b><span>horreur + SF + comédie, 42 films</span></div>
+<div class="kpi"><b>32 / 36</b><span>nanars à succès en anglais</span></div>
+<div class="kpi"><b>197 vs 38</b><span>votes médians, budget &gt; 10 M$ ou non</span></div>
+<div class="kpi"><b>5,55</b><span>note moyenne des films en 3D (6,31 sinon)</span></div>
+</div>
+<pre>-- Films primés à Cannes : table de référence + jointure
+CREATE TABLE cannes (nom TEXT);
+SELECT DISTINCT m.title, m.director, m.release_year, m.vote_average
+FROM netflix_movies_detailed_up_to_2025 m
+JOIN cannes c ON m.director LIKE '%' || c.nom || '%'
+ORDER BY m.director;</pre>
+<div class="pb"><b>Esprit critique.</b> Les échantillons sont petits (21 films en 3D, 42 de requins), les seuils (4,6 et 100 votes) sont des choix, et c’est de la corrélation : les requins ne rendent pas un film mauvais, ce sont les petites productions qui choisissent ce sujet. Je le dis dans le pitch plutôt que de le cacher.</div>
+</article>
+
+<article class="proj">
+<h3>Netflix : de l’analyse exploratoire au test statistique</h3>
+<ul class="tags"><li>SQL</li><li>T.TEST</li><li>d de Cohen</li><li>Corrélation</li><li>Dataviz</li></ul>
+<dl class="q">
+<dt>Question</dt><dd>Les films sud-coréens sont-ils vraiment mieux notés que les films américains ?</dd>
+<dt>Piège repéré</dt><dd>Des films « notés 0 » sont en réalité non notés (12 % pour la Corée du Sud, 3 % pour les États-Unis). Les garder fausse la comparaison : la moyenne coréenne passe de 6,36 à 5,63. J’ai donc comparé avec et sans les 0.</dd>
+<dt>Résultat</dt><dd>Sans les 0, p = 0,042 : l’écart existe statistiquement. Mais d de Cohen = 0,11, sous le seuil « petit » (0,2). L’écart est réel et négligeable en pratique, visible seulement grâce à un échantillon de plus de 8 000 films.</dd>
+</dl>
+<div class="wrap"><pre>-- Welch (variances inégales) et taille d’effet dans Sheets
+=T.TEST(A2:A7517; B2:B775; 2; 3)
+=(MOYENNE(B2:B775)-MOYENNE(A2:A7517)) /
+ RACINE(((NB(A2:A7517)-1)*VAR(A2:A7517)+(NB(B2:B775)-1)*VAR(B2:B775))
+        /(NB(A2:A7517)+NB(B2:B775)-2))</pre></div>
+<div class="kpis">
+<div class="kpi"><b>p = 0,042</b><span>écart significatif</span></div>
+<div class="kpi"><b>d = 0,11</b><span>effet négligeable</span></div>
+<div class="kpi"><b>R² = 0,09</b><span>popularité d’un genre vs sa note : 19 genres, relation non significative</span></div>
+</div>
+<div class="pb"><b>Décision.</b> Pour un investissement, on cherche un genre sous-représenté, bien noté et avec un public : animation (6,94) et familial (6,68) ressortent. Les documentaires sont aussi en forte croissance (67 titres en 2023, 273 en 2025).</div>
+</article>
+
+<article class="proj">
+<h3>Plan de recrutement : quel canal mérite le budget ?</h3>
+<ul class="tags"><li>Looker Studio</li><li>Google Sheets</li><li>KPIs média</li><li>Dashboard 2 pages</li></ul>
+<dl class="q">
+<dt>Contexte</dt><dd>3 semaines, 100 000 €, 6 acteurs média, un objectif : recruter.</dd>
+<dt>Démarche</dt><dd>Lecture du funnel complet (impressions, clics, conversion, coût par recrue) plutôt que d’un seul indicateur.</dd>
+<dt>Résultat</dt><dd>Indeed est le meilleur acteur : 76 recrues, le meilleur volume tous acteurs confondus, avec les meilleurs résultats en impressions, taux de clic et taux de recrue. Tabmo est le moins performant : 10 % de son budget consommé, 0,64 % de conversion et le coût par recrue le plus élevé. De bonnes impressions ne servent à rien si la conversion ne suit pas.</dd>
+<dt>Problème résolu</dt><dd>Looker Studio ne détectait aucune colonne. Cause : cellules fusionnées et logo dans l’en-tête. J’ai recréé une table propre (une ligne d’en-tête, une valeur par cellule) et le dashboard a fonctionné.</dd>
+</dl>
+<div class="pb"><b>Recommandation.</b> Réallouer le budget de Tabmo vers Indeed, en surveillant le coût par recrue pour détecter une saturation.</div>
+</article>
+
+<article class="proj">
+<h3>Bot or Not : nettoyer des avis clients avant de les analyser</h3>
+<ul class="tags"><li>Nettoyage de données</li><li>REGEXEXTRACT</li><li>UNIQUE</li><li>Google Sheets</li></ul>
+<dl class="q">
+<dt>Contexte</dt><dd>Environ 940 avis de restaurants récupérés tels quels (texte brut, doublons, étoiles écrites en toutes lettres).</dd>
+<dt>Démarche</dt><dd>Suppression des doublons, puis conversion de « Noté 4 sur 5 étoiles » en nombre exploitable pour calculer des moyennes. Certaines cellules commencent par un caractère parasite : l’expression régulière extrait le chiffre quoi qu’il arrive.</dd>
+</dl>
+<pre>=UNIQUE(A2:F940)
+=VALEUR(REGEXEXTRACT(D2; "Noté (\d)"))</pre>
+<div class="pb"><b>Prochaine étape.</b> Comparer les notes et la longueur des textes pour repérer les avis suspects, d’où le nom du projet.</div>
+</article>
+</div></section>
+
+<section id="contact"><div class="w">
+<h2>Travaillons ensemble</h2>
+<p class="lead">Je cherche une alternance data analyst sur 2 ans, rythme 1 jour en cours et 4 jours en entreprise, disponible immédiatement.</p>
+<div class="btns"><a class="btn p" href="mailto:assyamks@hotmail.fr">assyamks@hotmail.fr</a></div>
+</div></section>
+<footer><div class="w">Île-de-France · Français (langue maternelle), anglais C2, espagnol B2, russe B1</div></footer>
+</body>
+</html>
