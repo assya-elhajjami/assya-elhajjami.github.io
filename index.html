@@ -21,6 +21,9 @@ nav a{color:var(--mute);text-decoration:none}nav a:hover,nav a:focus-visible{col
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:34px 0 64px}
 .hero h1{font-size:clamp(36px,5.6vw,62px);font-weight:700;letter-spacing:-.02em}
 .hero p{color:var(--mute);max-width:52ch;margin:18px 0 24px}
+.one{font-size:18px;margin:0 0 12px;color:var(--ink)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.note{font-size:14px;color:var(--mute);margin:4px 0 12px}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn{padding:11px 20px;border-radius:8px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
 .btn.p{background:var(--ink);color:var(--bg)}
@@ -51,7 +54,7 @@ pre{margin:14px 0;background:var(--code);color:var(--codeink);border-radius:8px;
 .pb b{color:var(--ink)}
 .wrap{overflow-x:auto}
 footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute)}
-@media(max-width:780px){.hero{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.flow div{border-bottom:1px solid var(--line)}.q{grid-template-columns:1fr}.bar{grid-template-columns:120px 1fr 48px}.proj{padding:20px}}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.flow div{border-bottom:1px solid var(--line)}.q{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.bar{grid-template-columns:120px 1fr 48px}.proj{padding:20px}}
 </style>
 </head>
 <body>
@@ -99,78 +102,97 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute)}
 
 <section id="projets"><div class="w">
 <h2>Projets</h2>
-<p class="lead">Quatre projets, chacun avec la question, la méthode, le résultat et ce que je referais autrement.</p>
+<p class="lead">Cinq projets. Pour chacun : le problème posé, ce que j’ai fait, ce que j’ai trouvé et ce que cela change.</p>
 
 <article class="proj">
-<h3>PREHISTOSHARK 2 : prédire un échec garanti avec 16 000 films</h3>
-<ul class="tags"><li>SQL (SQLite)</li><li>Google Sheets</li><li>Analyse exploratoire</li><li>Nuages de mots</li><li>Projet de groupe</li></ul>
+<h3>Plan de recrutement : quel canal mérite le budget ?</h3>
+<p class="one">J’ai comparé 6 canaux de publicité pour savoir lequel recrute le mieux avec 100 000 €.</p>
+<ul class="tags"><li>Google Sheets</li><li>Looker Studio</li><li>KPIs marketing</li><li>Dashboard 2 pages</li></ul>
 <dl class="q">
-<dt>Question</dt><dd>Quels choix de production rendent un film à la fois mal noté et très vu, donc « un succès tant il est mauvais » ?</dd>
-<dt>Démarche</dt><dd>Analyse en SQL du catalogue Netflix (TMDB, jusqu’en 2025). Définition d’une cible : note sous 4,6 avec au moins 100 votes, soit 36 films. Pour chaque variable (genre, sujet, format, titre, langue, budget, description), comparaison de la cible au reste du catalogue.</dd>
-<dt>Résultat</dt><dd>Au lieu de prendre le pire de chaque catégorie, j’ai combiné les ingrédients qui font monter la visibilité et baisser la note.</dd>
+<dt>Le problème</dt><dd>Un budget de 100 000 € à répartir sur 6 acteurs en 3 semaines, avec un objectif : recruter. Lequel est le plus rentable, lequel faut-il arrêter ?</dd>
+<dt>Ce que j’ai fait</dt><dd>J’ai suivi tout le parcours du candidat : impressions, clics, conversion puis coût par recrue. J’ai construit les graphiques dans Google Sheets puis un dashboard Looker Studio.</dd>
+<dt>Ce que j’ai trouvé</dt><dd>Indeed est le meilleur acteur : 76 recrues, le meilleur résultat tous acteurs confondus, avec les meilleures impressions, le meilleur taux de clic et le meilleur taux de recrue. Tabmo est le moins performant : seulement 10 % de son budget a été utilisé, la conversion est de 0,64 % et le coût par recrue est le plus élevé.</dd>
+<dt>Ce que ça veut dire</dt><dd>Beaucoup d’impressions ne suffisent pas si les gens ne postulent pas. Je recommande de déplacer le budget de Tabmo vers Indeed.</dd>
+<dt>Un problème résolu</dt><dd>Looker Studio ne reconnaissait aucune colonne. Les cellules fusionnées et le logo dans l’en-tête du fichier bloquaient la lecture. J’ai recréé un tableau propre (une ligne d’en-tête, une valeur par cellule) et le dashboard a fonctionné.</dd>
 </dl>
-<div class="bars" role="img" aria-label="Part de films notés sous 4,6 : 60 % pour les titres Shark ou Piranha, 5 % pour le reste">
-<div class="bar"><span>Titres Shark / Piranha</span><i class="b" style="width:60%"></i><b>60 %</b></div>
-<div class="bar"><span>Reste du catalogue</span><i class="g" style="width:5%"></i><b>5 %</b></div>
-</div>
-<div class="kpis">
-<div class="kpi"><b>×3,5</b><span>horreur + SF + comédie, 42 films</span></div>
-<div class="kpi"><b>32 / 36</b><span>nanars à succès en anglais</span></div>
-<div class="kpi"><b>197 vs 38</b><span>votes médians, budget &gt; 10 M$ ou non</span></div>
-<div class="kpi"><b>5,55</b><span>note moyenne des films en 3D (6,31 sinon)</span></div>
-</div>
-<pre>-- Films primés à Cannes : table de référence + jointure
-CREATE TABLE cannes (nom TEXT);
-SELECT DISTINCT m.title, m.director, m.release_year, m.vote_average
-FROM netflix_movies_detailed_up_to_2025 m
-JOIN cannes c ON m.director LIKE '%' || c.nom || '%'
-ORDER BY m.director;</pre>
-<div class="pb"><b>Esprit critique.</b> Les échantillons sont petits (21 films en 3D, 42 de requins), les seuils (4,6 et 100 votes) sont des choix, et c’est de la corrélation : les requins ne rendent pas un film mauvais, ce sont les petites productions qui choisissent ce sujet. Je le dis dans le pitch plutôt que de le cacher.</div>
 </article>
 
 <article class="proj">
-<h3>Netflix : de l’analyse exploratoire au test statistique</h3>
-<ul class="tags"><li>SQL</li><li>T.TEST</li><li>d de Cohen</li><li>Corrélation</li><li>Dataviz</li></ul>
+<h3>Netflix : les films sud-coréens sont-ils mieux notés que les américains ?</h3>
+<p class="one">Une comparaison de notes, avec un test statistique pour vérifier que la différence n’est pas due au hasard.</p>
+<ul class="tags"><li>SQL (SQLite)</li><li>Test t de Welch</li><li>d de Cohen</li><li>Google Sheets</li></ul>
 <dl class="q">
-<dt>Question</dt><dd>Les films sud-coréens sont-ils vraiment mieux notés que les films américains ?</dd>
-<dt>Piège repéré</dt><dd>Des films « notés 0 » sont en réalité non notés (12 % pour la Corée du Sud, 3 % pour les États-Unis). Les garder fausse la comparaison : la moyenne coréenne passe de 6,36 à 5,63. J’ai donc comparé avec et sans les 0.</dd>
-<dt>Résultat</dt><dd>Sans les 0, p = 0,042 : l’écart existe statistiquement. Mais d de Cohen = 0,11, sous le seuil « petit » (0,2). L’écart est réel et négligeable en pratique, visible seulement grâce à un échantillon de plus de 8 000 films.</dd>
+<dt>Le problème</dt><dd>Dans le catalogue Netflix (16 000 films), la Corée du Sud semble mieux notée que les États-Unis. Est-ce vrai, et est-ce important ?</dd>
+<dt>Ce que j’ai fait</dt><dd>1. Requête SQL pour sortir les notes par pays. 2. Nettoyage : un film « noté 0 » est en fait un film non noté, 12 % pour la Corée du Sud contre 3 % pour les États-Unis. Je les ai donc retirés. 3. Export vers Sheets et test statistique.</dd>
+<dt>Ce que j’ai trouvé</dt><dd>Avec les 0, la Corée semble moins bien notée (5,63 contre 6,05). Sans les 0, elle est devant (6,36 contre 6,25). Le test donne p = 0,042 : la différence existe. Mais le d de Cohen est de 0,11, très en dessous du seuil « petit effet » (0,2).</dd>
+<dt>Ce que ça veut dire</dt><dd>Les deux pays sont en pratique au même niveau. La différence n’apparaît que parce que l’échantillon est grand (plus de 8 000 films). Garder les 0 aurait fait tirer la mauvaise conclusion.</dd>
 </dl>
-<div class="wrap"><pre>-- Welch (variances inégales) et taille d’effet dans Sheets
+<div class="wrap"><pre>-- Test de Welch (variances inégales) puis taille d’effet, dans Sheets
 =T.TEST(A2:A7517; B2:B775; 2; 3)
 =(MOYENNE(B2:B775)-MOYENNE(A2:A7517)) /
  RACINE(((NB(A2:A7517)-1)*VAR(A2:A7517)+(NB(B2:B775)-1)*VAR(B2:B775))
         /(NB(A2:A7517)+NB(B2:B775)-2))</pre></div>
 <div class="kpis">
-<div class="kpi"><b>p = 0,042</b><span>écart significatif</span></div>
-<div class="kpi"><b>d = 0,11</b><span>effet négligeable</span></div>
-<div class="kpi"><b>R² = 0,09</b><span>popularité d’un genre vs sa note : 19 genres, relation non significative</span></div>
+<div class="kpi"><b>p = 0,042</b><span>la différence existe</span></div>
+<div class="kpi"><b>d = 0,11</b><span>mais elle est négligeable</span></div>
 </div>
-<div class="pb"><b>Décision.</b> Pour un investissement, on cherche un genre sous-représenté, bien noté et avec un public : animation (6,94) et familial (6,68) ressortent. Les documentaires sont aussi en forte croissance (67 titres en 2023, 273 en 2025).</div>
 </article>
 
 <article class="proj">
-<h3>Plan de recrutement : quel canal mérite le budget ?</h3>
-<ul class="tags"><li>Looker Studio</li><li>Google Sheets</li><li>KPIs média</li><li>Dashboard 2 pages</li></ul>
+<h3>Netflix : quels genres et quels réalisateurs investir ?</h3>
+<p class="one">Une série de requêtes SQL et de graphiques pour guider un choix d’investissement.</p>
+<ul class="tags"><li>SQL</li><li>Jointures</li><li>Dataviz</li><li>Corrélation</li></ul>
 <dl class="q">
-<dt>Contexte</dt><dd>3 semaines, 100 000 €, 6 acteurs média, un objectif : recruter.</dd>
-<dt>Démarche</dt><dd>Lecture du funnel complet (impressions, clics, conversion, coût par recrue) plutôt que d’un seul indicateur.</dd>
-<dt>Résultat</dt><dd>Indeed est le meilleur acteur : 76 recrues, le meilleur volume tous acteurs confondus, avec les meilleurs résultats en impressions, taux de clic et taux de recrue. Tabmo est le moins performant : 10 % de son budget consommé, 0,64 % de conversion et le coût par recrue le plus élevé. De bonnes impressions ne servent à rien si la conversion ne suit pas.</dd>
-<dt>Problème résolu</dt><dd>Looker Studio ne détectait aucune colonne. Cause : cellules fusionnées et logo dans l’en-tête. J’ai recréé une table propre (une ligne d’en-tête, une valeur par cellule) et le dashboard a fonctionné.</dd>
+<dt>Le problème</dt><dd>Un studio doit choisir un genre de film. Vaut-il mieux un genre très produit ou rare ? Y a-t-il un lien entre popularité d’un genre et qualité perçue ?</dd>
+<dt>Ce que j’ai fait</dt><dd>J’ai calculé le nombre de films et la note moyenne par genre (19 genres), tracé un nuage de points avec droite de tendance, puis suivi la production sur 3 ans.</dd>
+<dt>Ce que j’ai trouvé</dt><dd>La relation entre le nombre de films et la note est faible (R² = 0,09) et non significative : avec 19 genres, elle peut être due au hasard. Les documentaires explosent (67 titres en 2023, 273 en 2025) alors que l’horreur recule (171 à 154). L’animation (6,94) et le familial (6,68) sont bien notés et peu produits.</dd>
+<dt>Ce que ça veut dire</dt><dd>Je recommande un genre sous-représenté, bien noté et avec un public : animation ou familial.</dd>
+<dt>Limite repérée</dt><dd>Les « déficits » calculés (par exemple The Gray Man : 200 M$ de budget pour 454 023 $ de recettes) ne comptent probablement que les recettes en salle, pas la diffusion sur Netflix. Ils ne prouvent donc pas qu’un film a perdu de l’argent. Et aucun film à gros budget n’a une note catastrophique : l’échec financier et la mauvaise note sont deux sujets séparés.</dd>
 </dl>
-<div class="pb"><b>Recommandation.</b> Réallouer le budget de Tabmo vers Indeed, en surveillant le coût par recrue pour détecter une saturation.</div>
+<pre>-- Films primés à Cannes : table de référence puis jointure
+CREATE TABLE cannes (nom TEXT);
+SELECT DISTINCT m.title, m.director, m.release_year, m.vote_average
+FROM netflix_movies_detailed_up_to_2025 m
+JOIN cannes c ON m.director LIKE '%' || c.nom || '%'
+ORDER BY m.director;</pre>
 </article>
 
 <article class="proj">
-<h3>Bot or Not : nettoyer des avis clients avant de les analyser</h3>
-<ul class="tags"><li>Nettoyage de données</li><li>REGEXEXTRACT</li><li>UNIQUE</li><li>Google Sheets</li></ul>
+<h3>PREHISTOSHARK 2 : le pire film possible, prouvé par les données</h3>
+<p class="one">Projet de groupe : utiliser 16 000 films pour fabriquer un film mauvais qui sera pourtant très vu.</p>
+<ul class="tags"><li>SQL</li><li>Analyse exploratoire</li><li>Nuages de mots</li><li>Storytelling</li><li>Présentation</li></ul>
 <dl class="q">
-<dt>Contexte</dt><dd>Environ 940 avis de restaurants récupérés tels quels (texte brut, doublons, étoiles écrites en toutes lettres).</dd>
-<dt>Démarche</dt><dd>Suppression des doublons, puis conversion de « Noté 4 sur 5 étoiles » en nombre exploitable pour calculer des moyennes. Certaines cellules commencent par un caractère parasite : l’expression régulière extrait le chiffre quoi qu’il arrive.</dd>
+<dt>Le problème</dt><dd>La consigne : pitcher le pire film possible. Mon angle : un film mal noté (moins de 4,6 sur 10) mais très vu (au moins 100 votes). C’est le cas de 36 films du catalogue.</dd>
+<dt>Ce que j’ai fait</dt><dd>Pour chaque ingrédient (genre, sujet, format, titre, langue, budget, mots de la description), j’ai comparé ces 36 films au reste du catalogue, puis j’ai combiné les ingrédients en un seul film cohérent au lieu de prendre le pire de chaque catégorie.</dd>
+<dt>Ce que j’ai trouvé</dt><dd>Horreur, science-fiction et comédie ensemble : 3,5 fois plus de notes sous 4,6. Les titres avec « Shark » ou « Piranha » : 60 % sous 4,6 contre 5 % ailleurs. Le film en 3D : 5,55 de moyenne contre 6,31. En anglais et américain : 32 films sur 36. Budget supérieur à 10 M$ : 197 votes médians contre 38.</dd>
+<dt>Ce que ça veut dire</dt><dd>Le film final : PREHISTOSHARK 2, un requin préhistorique en 3D, en anglais, avec 80 M$ de budget.</dd>
+<dt>Limites assumées</dt><dd>Petits échantillons (21 films en 3D, 42 de requins), seuils choisis par nous, et corrélation n’est pas causalité : ce sont les petites productions qui choisissent les requins, pas les requins qui font un mauvais film.</dd>
 </dl>
-<pre>=UNIQUE(A2:F940)
-=VALEUR(REGEXEXTRACT(D2; "Noté (\d)"))</pre>
-<div class="pb"><b>Prochaine étape.</b> Comparer les notes et la longueur des textes pour repérer les avis suspects, d’où le nom du projet.</div>
+<div class="bars" role="img" aria-label="Part de films notés sous 4,6 : 60 % pour les titres Shark ou Piranha, 5 % pour le reste">
+<div class="bar"><span>Titres Shark / Piranha</span><i class="b" style="width:60%"></i><b>60 %</b></div>
+<div class="bar"><span>Reste du catalogue</span><i class="g" style="width:5%"></i><b>5 %</b></div>
+</div>
+</article>
+
+<article class="proj">
+<h3>Bot or Not : quel jeu d’avis est suspect ?</h3>
+<p class="one">J’ai comparé deux jeux d’avis clients de la même application pour repérer celui qui ressemble à des faux avis.</p>
+<ul class="tags"><li>Google Sheets</li><li>Nettoyage</li><li>Dataviz</li><li>Détection d’anomalies</li><li>REGEXEXTRACT</li></ul>
+<dl class="q">
+<dt>Le problème</dt><dd>Deux jeux d’avis (A : 879 avis, B : 940 avis) et une question : l’un des deux a-t-il été fabriqué ou gonflé par des bots ? Les données brutes sont inutilisables telles quelles : la note est écrite « Noté 4 sur 5 étoiles », donc du texte, pas un nombre.</dd>
+<dt>Ce que j’ai fait</dt><dd>J’ai nettoyé les deux jeux : extraction du chiffre de la note avec une expression régulière, vérification des doublons. J’ai ensuite construit deux graphiques par jeu dans Google Sheets : la répartition par étoiles et le nombre d’avis par jour.</dd>
+<dt>Ce que j’ai trouvé</dt><dd>Le jeu A est atypique de deux façons. D’abord, 97 % de ses avis sont à 5 ou 1 étoile : il n’y a que 28 avis à 2, 3 ou 4 étoiles sur 879. Ensuite, le rythme est irrégulier : jusqu’à 30 avis en une seule journée (9 novembre 2024) et 15 jours à plus de 3 fois la moyenne. Dans le jeu B, la répartition est plus étalée (63 % de 5 étoiles, 19 % de 4 étoiles) et le rythme est régulier, avec 13 avis par jour au maximum.</dd>
+<dt>Ce que ça veut dire</dt><dd>Le jeu A a le profil d’un jeu suspect : des avis tout bons ou tout mauvais, publiés par vagues. C’est un indice, pas une preuve. Pour confirmer, il faudrait regarder le contenu des textes et les profils des auteurs.</dd>
+</dl>
+<div class="g2"><svg viewBox="0 0 300 190" role="img" aria-label="Jeu A : avis par nombre d’étoiles" width="100%"><text x="150.0" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Jeu A : avis par nombre d’étoiles</text><rect x="28" y="36" width="34" height="120" rx="3" fill="var(--acc2)"/><text x="45" y="31" text-anchor="middle" font-size="11" fill="var(--ink)">728</text><text x="45" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">5★</text><rect x="80" y="152" width="34" height="4" rx="3" fill="var(--acc2)"/><text x="98" y="147" text-anchor="middle" font-size="11" fill="var(--ink)">22</text><text x="98" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">4★</text><rect x="133" y="155" width="34" height="2" rx="3" fill="var(--acc2)"/><text x="150" y="150" text-anchor="middle" font-size="11" fill="var(--ink)">4</text><text x="150" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">3★</text><rect x="186" y="156" width="34" height="2" rx="3" fill="var(--acc2)"/><text x="202" y="151" text-anchor="middle" font-size="11" fill="var(--ink)">2</text><text x="202" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">2★</text><rect x="238" y="136" width="34" height="20" rx="3" fill="var(--acc2)"/><text x="255" y="131" text-anchor="middle" font-size="11" fill="var(--ink)">123</text><text x="255" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">1★</text></svg><svg viewBox="0 0 300 190" role="img" aria-label="Jeu B : avis par nombre d’étoiles" width="100%"><text x="150.0" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Jeu B : avis par nombre d’étoiles</text><rect x="28" y="59" width="34" height="97" rx="3" fill="var(--acc)"/><text x="45" y="54" text-anchor="middle" font-size="11" fill="var(--ink)">588</text><text x="45" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">5★</text><rect x="80" y="127" width="34" height="29" rx="3" fill="var(--acc)"/><text x="98" y="122" text-anchor="middle" font-size="11" fill="var(--ink)">176</text><text x="98" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">4★</text><rect x="133" y="144" width="34" height="12" rx="3" fill="var(--acc)"/><text x="150" y="139" text-anchor="middle" font-size="11" fill="var(--ink)">72</text><text x="150" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">3★</text><rect x="186" y="153" width="34" height="3" rx="3" fill="var(--acc)"/><text x="202" y="148" text-anchor="middle" font-size="11" fill="var(--ink)">17</text><text x="202" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">2★</text><rect x="238" y="142" width="34" height="14" rx="3" fill="var(--acc)"/><text x="255" y="137" text-anchor="middle" font-size="11" fill="var(--ink)">87</text><text x="255" y="172" text-anchor="middle" font-size="11" fill="var(--mute)">1★</text></svg></div>
+<div class="g2"><svg viewBox="0 0 600 210" role="img" aria-label="Jeu A : nombre d’avis par jour" width="100%"><text x="300.0" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Jeu A : nombre d’avis par jour</text><line x1="34" x2="592" y1="180" y2="180" stroke="var(--line)"/><text x="29" y="184" text-anchor="end" font-size="10" fill="var(--mute)">0</text><line x1="34" x2="592" y1="131" y2="131" stroke="var(--line)"/><text x="29" y="135" text-anchor="end" font-size="10" fill="var(--mute)">10</text><line x1="34" x2="592" y1="83" y2="83" stroke="var(--line)"/><text x="29" y="87" text-anchor="end" font-size="10" fill="var(--mute)">20</text><line x1="34" x2="592" y1="34" y2="34" stroke="var(--line)"/><text x="29" y="38" text-anchor="end" font-size="10" fill="var(--mute)">30</text><polyline points="34.0,175.1 37.1,175.1 40.2,175.1 43.2,175.1 46.3,160.5 49.4,175.1 52.5,175.1 55.6,175.1 58.7,150.8 61.7,136.2 64.8,92.4 67.9,116.7 71.0,77.8 74.1,160.5 77.2,165.4 80.2,155.7 83.3,175.1 86.4,141.1 89.5,165.4 92.6,160.5 95.7,170.3 98.7,155.7 101.8,175.1 104.9,170.3 108.0,170.3 111.1,175.1 114.2,170.3 117.2,170.3 120.3,165.4 123.4,165.4 126.5,175.1 129.6,165.4 132.7,170.3 135.7,160.5 138.8,165.4 141.9,165.4 145.0,175.1 148.1,170.3 151.1,165.4 154.2,175.1 157.3,155.7 160.4,165.4 163.5,170.3 166.6,131.3 169.6,141.1 172.7,165.4 175.8,165.4 178.9,170.3 182.0,160.5 185.1,170.3 188.1,165.4 191.2,165.4 194.3,170.3 197.4,175.1 200.5,170.3 203.6,175.1 206.6,175.1 209.7,175.1 212.8,170.3 215.9,165.4 219.0,175.1 222.1,175.1 225.1,165.4 228.2,160.5 231.3,160.5 234.4,150.8 237.5,150.8 240.6,87.5 243.6,131.3 246.7,175.1 249.8,175.1 252.9,175.1 256.0,175.1 259.0,175.1 262.1,170.3 265.2,175.1 268.3,175.1 271.4,175.1 274.5,175.1 277.5,175.1 280.6,175.1 283.7,68.1 286.8,111.9 289.9,38.9 293.0,34.0 296.0,160.5 299.1,165.4 302.2,126.5 305.3,165.4 308.4,170.3 311.5,111.9 314.5,82.7 317.6,107.0 320.7,107.0 323.8,145.9 326.9,145.9 330.0,160.5 333.0,165.4 336.1,155.7 339.2,175.1 342.3,170.3 345.4,126.5 348.5,160.5 351.5,175.1 354.6,175.1 357.7,175.1 360.8,141.1 363.9,131.3 367.0,165.4 370.0,145.9 373.1,97.3 376.2,175.1 379.3,175.1 382.4,87.5 385.4,38.9 388.5,131.3 391.6,160.5 394.7,170.3 397.8,165.4 400.9,97.3 403.9,160.5 407.0,175.1 410.1,175.1 413.2,175.1 416.3,170.3 419.4,170.3 422.4,155.7 425.5,121.6 428.6,150.8 431.7,155.7 434.8,165.4 437.9,155.7 440.9,160.5 444.0,175.1 447.1,175.1 450.2,165.4 453.3,175.1 456.4,175.1 459.4,155.7 462.5,150.8 465.6,107.0 468.7,141.1 471.8,87.5 474.9,121.6 477.9,160.5 481.0,175.1 484.1,170.3 487.2,150.8 490.3,155.7 493.3,155.7 496.4,175.1 499.5,145.9 502.6,126.5 505.7,131.3 508.8,131.3 511.8,150.8 514.9,145.9 518.0,175.1 521.1,160.5 524.2,170.3 527.3,170.3 530.3,175.1 533.4,160.5 536.5,165.4 539.6,160.5 542.7,175.1 545.8,170.3 548.8,175.1 551.9,175.1 555.0,175.1 558.1,175.1 561.2,170.3 564.3,175.1 567.3,175.1 570.4,175.1 573.5,175.1 576.6,175.1 579.7,175.1 582.8,175.1 585.8,175.1 588.9,175.1 592.0,175.1" fill="none" stroke="var(--acc2)" stroke-width="1.6" stroke-linejoin="round"/><text x="34" y="200" font-size="10" fill="var(--mute)">05/2024</text><text x="592" y="200" text-anchor="end" font-size="10" fill="var(--mute)">10/2025</text></svg><svg viewBox="0 0 600 210" role="img" aria-label="Jeu B : nombre d’avis par jour" width="100%"><text x="300.0" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Jeu B : nombre d’avis par jour</text><line x1="34" x2="592" y1="180" y2="180" stroke="var(--line)"/><text x="29" y="184" text-anchor="end" font-size="10" fill="var(--mute)">0</text><line x1="34" x2="592" y1="131" y2="131" stroke="var(--line)"/><text x="29" y="135" text-anchor="end" font-size="10" fill="var(--mute)">10</text><line x1="34" x2="592" y1="83" y2="83" stroke="var(--line)"/><text x="29" y="87" text-anchor="end" font-size="10" fill="var(--mute)">20</text><line x1="34" x2="592" y1="34" y2="34" stroke="var(--line)"/><text x="29" y="38" text-anchor="end" font-size="10" fill="var(--mute)">30</text><polyline points="34.0,160.5 36.5,165.4 39.1,150.8 41.6,145.9 44.1,145.9 46.7,150.8 49.2,160.5 51.8,165.4 54.3,170.3 56.8,145.9 59.4,155.7 61.9,141.1 64.4,175.1 67.0,145.9 69.5,170.3 72.0,136.2 74.6,150.8 77.1,155.7 79.7,150.8 82.2,141.1 84.7,160.5 87.3,160.5 89.8,170.3 92.3,136.2 94.9,155.7 97.4,145.9 99.9,141.1 102.5,160.5 105.0,145.9 107.6,165.4 110.1,136.2 112.6,131.3 115.2,160.5 117.7,141.1 120.2,160.5 122.8,155.7 125.3,145.9 127.8,150.8 130.4,155.7 132.9,165.4 135.5,150.8 138.0,170.3 140.5,170.3 143.1,160.5 145.6,141.1 148.1,165.4 150.7,155.7 153.2,170.3 155.7,145.9 158.3,150.8 160.8,165.4 163.4,141.1 165.9,150.8 168.4,155.7 171.0,155.7 173.5,175.1 176.0,165.4 178.6,170.3 181.1,150.8 183.6,145.9 186.2,165.4 188.7,155.7 191.3,150.8 193.8,160.5 196.3,165.4 198.9,150.8 201.4,175.1 203.9,165.4 206.5,175.1 209.0,175.1 211.5,160.5 214.1,155.7 216.6,150.8 219.2,175.1 221.7,175.1 224.2,175.1 226.8,160.5 229.3,155.7 231.8,165.4 234.4,145.9 236.9,160.5 239.4,175.1 242.0,175.1 244.5,175.1 247.1,170.3 249.6,165.4 252.1,175.1 254.7,136.2 257.2,170.3 259.7,160.5 262.3,145.9 264.8,155.7 267.3,141.1 269.9,141.1 272.4,150.8 275.0,150.8 277.5,131.3 280.0,160.5 282.6,131.3 285.1,155.7 287.6,160.5 290.2,150.8 292.7,175.1 295.2,175.1 297.8,150.8 300.3,170.3 302.9,155.7 305.4,150.8 307.9,155.7 310.5,136.2 313.0,141.1 315.5,160.5 318.1,165.4 320.6,155.7 323.1,170.3 325.7,175.1 328.2,160.5 330.8,155.7 333.3,165.4 335.8,150.8 338.4,170.3 340.9,175.1 343.4,165.4 346.0,160.5 348.5,170.3 351.0,165.4 353.6,170.3 356.1,160.5 358.7,165.4 361.2,155.7 363.7,165.4 366.3,165.4 368.8,150.8 371.3,145.9 373.9,155.7 376.4,160.5 378.9,155.7 381.5,170.3 384.0,160.5 386.6,155.7 389.1,165.4 391.6,150.8 394.2,160.5 396.7,155.7 399.2,155.7 401.8,165.4 404.3,155.7 406.8,165.4 409.4,165.4 411.9,155.7 414.5,160.5 417.0,155.7 419.5,150.8 422.1,165.4 424.6,165.4 427.1,160.5 429.7,150.8 432.2,165.4 434.7,150.8 437.3,170.3 439.8,160.5 442.4,141.1 444.9,170.3 447.4,175.1 450.0,170.3 452.5,165.4 455.0,175.1 457.6,160.5 460.1,155.7 462.6,175.1 465.2,165.4 467.7,175.1 470.3,175.1 472.8,160.5 475.3,150.8 477.9,170.3 480.4,175.1 482.9,165.4 485.5,165.4 488.0,165.4 490.5,170.3 493.1,175.1 495.6,170.3 498.2,175.1 500.7,170.3 503.2,175.1 505.8,175.1 508.3,145.9 510.8,155.7 513.4,175.1 515.9,116.7 518.4,165.4 521.0,175.1 523.5,175.1 526.1,150.8 528.6,160.5 531.1,150.8 533.7,150.8 536.2,175.1 538.7,165.4 541.3,170.3 543.8,165.4 546.3,160.5 548.9,150.8 551.4,121.6 554.0,160.5 556.5,170.3 559.0,150.8 561.6,170.3 564.1,160.5 566.6,170.3 569.2,155.7 571.7,175.1 574.2,170.3 576.8,170.3 579.3,160.5 581.9,145.9 584.4,131.3 586.9,145.9 589.5,155.7 592.0,160.5" fill="none" stroke="var(--acc)" stroke-width="1.6" stroke-linejoin="round"/><text x="34" y="200" font-size="10" fill="var(--mute)">07/2025</text><text x="592" y="200" text-anchor="end" font-size="10" fill="var(--mute)">03/2026</text></svg></div>
+<p class="note">Les graphiques sont à la même échelle (0 à 30 avis par jour) pour que la différence de rythme soit visible.</p>
+<div class="kpis">
+<div class="kpi"><b>97 % contre 72 %</b><span>part des avis à 5 ou 1 étoile, jeu A contre jeu B</span></div>
+<div class="kpi"><b>CV 1,18 contre 0,56</b><span>irrégularité des avis par jour (écart-type divisé par la moyenne)</span></div>
+</div>
+<pre>=VALEUR(REGEXEXTRACT(D2; "Noté (\d)"))
+=NB.SI(F:F; 5)</pre>
 </article>
 </div></section>
 
