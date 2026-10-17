@@ -24,6 +24,12 @@ nav a{color:var(--mute);text-decoration:none}nav a:hover,nav a:focus-visible{col
 .one{font-size:18px;margin:0 0 12px;color:var(--ink)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
 .note{font-size:14px;color:var(--mute);margin:4px 0 12px}
+h4{font:600 18px "Bricolage Grotesque",sans-serif;margin:24px 0 10px}
+.t{width:100%;min-width:560px;border-collapse:collapse;font-size:14.5px}
+.t th,.t td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.t th{background:var(--bg);font-weight:600;white-space:normal}.t td.n{text-align:right}
+.t td.hi{color:var(--acc);font-weight:700}.t td.lo{color:var(--acc2);font-weight:700}
+.chips{margin:8px 0;font-size:15px}.chips b{display:inline-block;min-width:96px;color:var(--acc)}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn{padding:11px 20px;border-radius:8px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
 .btn.p{background:var(--ink);color:var(--bg)}
@@ -106,13 +112,22 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute)}
 
 <article class="proj">
 <h3>Plan de recrutement : quel canal mérite le budget ?</h3>
-<p class="one">J’ai comparé 6 canaux de publicité pour savoir lequel recrute le mieux avec 100 000 €.</p>
+<p class="one">J’ai comparé 6 canaux de publicité après deux semaines de campagne pour savoir lequel recrute le mieux.</p>
 <ul class="tags"><li>Google Sheets</li><li>Looker Studio</li><li>KPIs marketing</li><li>Dashboard 2 pages</li></ul>
 <dl class="q">
-<dt>Le problème</dt><dd>Un budget de 100 000 € à répartir sur 6 acteurs en 3 semaines, avec un objectif : recruter. Lequel est le plus rentable, lequel faut-il arrêter ?</dd>
-<dt>Ce que j’ai fait</dt><dd>J’ai suivi tout le parcours du candidat : impressions, clics, conversion puis coût par recrue. J’ai construit les graphiques dans Google Sheets puis un dashboard Looker Studio.</dd>
-<dt>Ce que j’ai trouvé</dt><dd>Indeed est le meilleur acteur : 76 recrues, le meilleur résultat tous acteurs confondus, avec les meilleures impressions, le meilleur taux de clic et le meilleur taux de recrue. Tabmo est le moins performant : seulement 10 % de son budget a été utilisé, la conversion est de 0,64 % et le coût par recrue est le plus élevé.</dd>
-<dt>Ce que ça veut dire</dt><dd>Beaucoup d’impressions ne suffisent pas si les gens ne postulent pas. Je recommande de déplacer le budget de Tabmo vers Indeed.</dd>
+<dt>Le problème</dt><dd>Un budget de 100 000 € à répartir sur 6 acteurs en 3 semaines, avec un objectif : recruter. Après deux semaines, quels canaux garder et lesquels arrêter ?</dd>
+<dt>Ce que j’ai fait</dt><dd>J’ai suivi tout le parcours du candidat : impressions, clics, arrivées sur le site, conversion, puis coût par recrue. J’ai construit les graphiques dans Google Sheets puis un dashboard Looker Studio sur 2 pages.</dd>
+</dl>
+<h4>Les résultats après deux semaines</h4>
+<div class="wrap"><table class="t"><thead><tr><th>Acteur</th><th>Budget dépensé</th><th>% du budget alloué utilisé</th><th>Impressions</th><th>Clics</th><th>Taux de clics</th><th>Arrivées</th><th>Taux d’arrivée</th><th>Recrues</th><th>Coût par recrue</th><th>Taux de conversion</th></tr></thead><tbody><tr><td class="">Tabmo</td><td class="n">5 000 €</td><td class="n">10 %</td><td class="n">450 000</td><td class="n">1 800</td><td class="n">0,40 %</td><td class="n">1 400</td><td class="n">78 %</td><td class="n">9</td><td class="n lo">555,56 €</td><td class="n lo">0,64 %</td></tr><tr><td class="">Adyoulike</td><td class="n">1 500 €</td><td class="n">20 %</td><td class="n">120 000</td><td class="n">800</td><td class="n">0,67 %</td><td class="n">650</td><td class="n">81 %</td><td class="n">8</td><td class="n">187,50 €</td><td class="n">1,23 %</td></tr><tr><td class="">Facebook</td><td class="n">10 000 €</td><td class="n">67 %</td><td class="n">926 000</td><td class="n">4 500</td><td class="n">0,49 %</td><td class="n">2 200</td><td class="n">49 %</td><td class="n">45</td><td class="n">222,22 €</td><td class="n">2,05 %</td></tr><tr><td class="">RythmOne</td><td class="n">2 500 €</td><td class="n">90 %</td><td class="n">337 000</td><td class="n">1 780</td><td class="n">0,53 %</td><td class="n">1 190</td><td class="n">67 %</td><td class="n">14</td><td class="n hi">178,57 €</td><td class="n">1,18 %</td></tr><tr><td class="">GoldenBees</td><td class="n">3 200 €</td><td class="n">69 %</td><td class="n">300 000</td><td class="n">850</td><td class="n">0,28 %</td><td class="n">700</td><td class="n">82 %</td><td class="n">15</td><td class="n">213,33 €</td><td class="n hi">2,14 %</td></tr><tr><td class="">Indeed</td><td class="n">15 000 €</td><td class="n">72 %</td><td class="n hi">1 200 000</td><td class="n hi">10 460</td><td class="n hi">0,87 %</td><td class="n">8 300</td><td class="n">79 %</td><td class="n hi">76</td><td class="n">197,37 €</td><td class="n">0,92 %</td></tr></tbody></table></div>
+<p class="note">En vert, le meilleur résultat de la colonne. En orange, le plus faible. 37 200 € dépensés pour 167 recrues, soit un coût moyen d’environ 223 € par recrue.</p>
+<div class="bars"><div class="bar"><span>Indeed</span><i class="" style="width:100.0%"></i><b>76</b></div><div class="bar"><span>Facebook</span><i class="" style="width:59.2%"></i><b>45</b></div><div class="bar"><span>GoldenBees</span><i class="" style="width:19.7%"></i><b>15</b></div><div class="bar"><span>RythmOne</span><i class="" style="width:18.4%"></i><b>14</b></div><div class="bar"><span>Tabmo</span><i class="b" style="width:11.8%"></i><b>9</b></div><div class="bar"><span>Adyoulike</span><i class="" style="width:10.5%"></i><b>8</b></div></div>
+<p class="note">Nombre de recrues par acteur.</p>
+<div class="bars"><div class="bar"><span>Tabmo</span><i class="b" style="width:99.9%"></i><b>555,56 €</b></div><div class="bar"><span>Indeed</span><i class="" style="width:35.5%"></i><b>197,37 €</b></div><div class="bar"><span>Facebook</span><i class="" style="width:40.0%"></i><b>222,22 €</b></div><div class="bar"><span>GoldenBees</span><i class="" style="width:38.4%"></i><b>213,33 €</b></div><div class="bar"><span>Adyoulike</span><i class="" style="width:33.7%"></i><b>187,50 €</b></div><div class="bar"><span>RythmOne</span><i class="" style="width:32.1%"></i><b>178,57 €</b></div></div>
+<p class="note">Coût par recrue.</p>
+<dl class="q">
+<dt>Ce que j’ai trouvé</dt><dd>Indeed est le meilleur acteur : 76 recrues (le meilleur résultat tous acteurs confondus), 1,2 million d’impressions, le meilleur taux de clics (0,87 %) et un coût par recrue de 197 €, le 3e plus bas. Sa conversion (0,92 %) est en revanche plus faible que celle de GoldenBees (2,14 %) et de Facebook (2,05 %). Tabmo est le moins performant : 10 % du budget utilisé, conversion de 0,64 % et le coût par recrue le plus élevé (556 €), plus de 3 fois celui de RythmOne (179 €).</dd>
+<dt>Ce que ça veut dire</dt><dd>Beaucoup d’impressions ne suffisent pas si les gens ne postulent pas. Je recommande de déplacer le budget de Tabmo vers Indeed, et de tester GoldenBees et Facebook, qui convertissent le mieux.</dd>
 <dt>Un problème résolu</dt><dd>Looker Studio ne reconnaissait aucune colonne. Les cellules fusionnées et le logo dans l’en-tête du fichier bloquaient la lecture. J’ai recréé un tableau propre (une ligne d’en-tête, une valeur par cellule) et le dashboard a fonctionné.</dd>
 </dl>
 </article>
@@ -172,6 +187,19 @@ ORDER BY m.director;</pre>
 <div class="bar"><span>Titres Shark / Piranha</span><i class="b" style="width:60%"></i><b>60 %</b></div>
 <div class="bar"><span>Reste du catalogue</span><i class="g" style="width:5%"></i><b>5 %</b></div>
 </div>
+<h4>Les données derrière chaque choix</h4>
+<p class="note">Genre : part de chaque genre parmi les films notés sous 4,6, comparée à sa part dans le catalogue. Mélangés, horreur, SF et comédie passent 3,5 fois plus souvent sous 4,6 (42 films).</p>
+<div class="wrap"><table class="t"><thead><tr><th>Genre</th><th>Films mal notés</th><th>Catalogue</th><th>Écart</th></tr></thead><tbody><tr><td class="">Horreur</td><td class="n">15 %</td><td class="n">6 %</td><td class="n">×2,4</td></tr><tr><td class="">Science-fiction</td><td class="n">8 %</td><td class="n">4 %</td><td class="n">×2,1</td></tr></tbody></table></div>
+<p class="note">Format et titre : la 3D baisse la note, la suite numérotée aussi, mais pas le titre à deux-points.</p>
+<div class="bars"><div class="bar"><span>Films en 3D (21), note moyenne</span><i class="b" style="width:79.3%"></i><b>5,55</b></div><div class="bar"><span>Autres films, note moyenne</span><i class="g" style="width:90.1%"></i><b>6,31</b></div><div class="bar"><span>Suites numérotées, mal notés</span><i class="b" style="width:80.0%"></i><b>8 %</b></div><div class="bar"><span>Autres films, mal notés</span><i class="g" style="width:45.0%"></i><b>4,5 %</b></div><div class="bar"><span>Titres à deux-points, note</span><i class="" style="width:94.3%"></i><b>6,60</b></div><div class="bar"><span>Autres titres, note</span><i class="g" style="width:89.4%"></i><b>6,26</b></div></div>
+<p class="note">Langue et budget : un mauvais film n’est vu que s’il est en anglais et financé. Votes médians par film mal noté.</p>
+<div class="bars"><div class="bar"><span>Anglophone</span><i class="" style="width:31.0%"></i><b>62</b></div><div class="bar"><span>Non anglophone</span><i class="g" style="width:2.0%"></i><b>4</b></div><div class="bar"><span>Budget supérieur à 10 M$</span><i class="" style="width:98.5%"></i><b>197</b></div><div class="bar"><span>Autres budgets</span><i class="g" style="width:19.0%"></i><b>38</b></div></div>
+<p class="note">Budget : exemples de films mal notés avec un gros budget, qui montrent que l’argent ne garantit pas la note mais garantit la visibilité.</p>
+<div class="wrap"><table class="t"><thead><tr><th>Film</th><th>Budget</th><th>Note</th></tr></thead><tbody><tr><td class="">Cats</td><td class="n">95 M$</td><td class="n">4,1</td></tr><tr><td class="">Jack and Jill</td><td class="n">79 M$</td><td class="n">4,4</td></tr><tr><td class="">Fantastic Four</td><td class="n">120 M$</td><td class="n">4,4</td></tr></tbody></table></div>
+<p class="note">Mots des descriptions, d’après les nuages de mots des 500 films les plus et les moins populaires.</p>
+<div class="chips"><b>À utiliser</b> threat · enemy · heroes · powers · forces · ruthless · revenge · humanity · fate · creatures · unexpected · magical</div>
+<div class="chips"><b>À éviter</b> documentary · based · tells · college · girls · accident · perfect</div>
+<div class="chips"><b>À proscrire</b> erotic · sexy · temptation (associés aux films mal notés mais peu vus, surtout coréens)</div>
 </article>
 
 <article class="proj">
